@@ -10,9 +10,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 @Endpoint
 public class OglasiEndpoint {
     private static final String NAMESPACE_URI = "http://localhost.com/oglas";
-
     private OglasiRepository oglasiRepository;
-
     @Autowired
     public OglasiEndpoint(OglasiRepository oglasiRepository){
         this.oglasiRepository = oglasiRepository;

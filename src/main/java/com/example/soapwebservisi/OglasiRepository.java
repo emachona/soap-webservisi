@@ -14,7 +14,6 @@ import javax.xml.datatype.DatatypeFactory;
 @Component
 public class OglasiRepository {
     private static final Map<Integer, Oglas> oglasiMap = new HashMap<>();
-
     @PostConstruct
     public void initData() throws DatatypeConfigurationException {
         Oglas oglas1 = new Oglas();
@@ -30,7 +29,6 @@ public class OglasiRepository {
         oglas1.setCena(new BigDecimal(50.43));
         oglas1.setDatum(xmlGregorianCalendar);
         oglas1.setOcena(new BigDecimal(0.00));
-
         oglasiMap.put(oglas1.getId(), oglas1);
 
         Oglas oglas2 = new Oglas();
@@ -41,7 +39,6 @@ public class OglasiRepository {
         oglas2.setCena(new BigDecimal(100.00));
         oglas2.setDatum(xmlGregorianCalendar);
         oglas2.setOcena(new BigDecimal(0.00));
-
         oglasiMap.put(oglas2.getId(), oglas2);
     }
 
@@ -52,19 +49,14 @@ public class OglasiRepository {
 
     public Oglasi findbyOcena(BigDecimal ocena){
         OglasiWrapper og = new OglasiWrapper();
-        //Oglasi oglasii = new Oglasi();
         ArrayList oglasii = new ArrayList<Oglas>();
-        Iterator<Map.Entry<Integer, Oglas>> new_Iterator
-                = oglasiMap.entrySet().iterator();
-
+        Iterator<Map.Entry<Integer, Oglas>> new_Iterator = oglasiMap.entrySet().iterator();
         while (new_Iterator.hasNext()) {
             Oglas oglas = new_Iterator.next().getValue();
             if(oglas.getOcena().compareTo(ocena) == 0){
-                //System.out.println(new_Iterator.next().getValue());
                 oglasii.add(oglas);
             }
         }
-
         og.setOglasi(oglasii);
 
         return og;
@@ -76,7 +68,9 @@ public class OglasiRepository {
     }
 
     public Oglas updateOcena(int id, BigDecimal ocena){
-        findOglas(id).setOcena(ocena);
+        if(ocena.compareTo(BigDecimal.valueOf(1)) != -1 && ocena.compareTo(BigDecimal.valueOf(10)) != 1){
+            findOglas(id).setOcena(ocena);
+        }
         return oglasiMap.get(id);
     }
 }
