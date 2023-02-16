@@ -30,10 +30,59 @@
         </xs:sequence>
     </xs:complexType>
 
+    <xs:element name="updateOglasRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:int"/>
+                <xs:element name="cena" type="xs:decimal"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateOglasResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="oglas" type="tns:oglas"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateOcenaRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:int"/>
+                <xs:element name="ocena" type="xs:decimal"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateOcenaResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="oglas" type="tns:oglas"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
     <xs:complexType name="oglasi">
         <xs:sequence>
             <xs:element name="oglas" type="tns:oglas" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
 
+    <xs:element name="getOglasOcenaRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ocena" type="xs:decimal"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getOglasOcenaResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="oglasi" type="tns:oglasi"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>

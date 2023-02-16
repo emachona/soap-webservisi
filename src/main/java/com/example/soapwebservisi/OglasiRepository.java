@@ -1,5 +1,6 @@
 package com.example.soapwebservisi;
 
+import com.localhost.oglas.Oglasi;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 import com.localhost.oglas.Oglas;
@@ -7,10 +8,7 @@ import com.localhost.oglas.Oglas;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.*;
 import javax.xml.datatype.DatatypeFactory;
 
 @Component
@@ -49,6 +47,36 @@ public class OglasiRepository {
 
     public Oglas findOglas(int id){
         System.out.println(oglasiMap.get(id));
+        return oglasiMap.get(id);
+    }
+
+    public Oglasi findbyOcena(BigDecimal ocena){
+        OglasiWrapper og = new OglasiWrapper();
+        //Oglasi oglasii = new Oglasi();
+        ArrayList oglasii = new ArrayList<Oglas>();
+        Iterator<Map.Entry<Integer, Oglas>> new_Iterator
+                = oglasiMap.entrySet().iterator();
+
+        while (new_Iterator.hasNext()) {
+            Oglas oglas = new_Iterator.next().getValue();
+            if(oglas.getOcena().compareTo(ocena) == 0){
+                //System.out.println(new_Iterator.next().getValue());
+                oglasii.add(oglas);
+            }
+        }
+
+        og.setOglasi(oglasii);
+
+        return og;
+    }
+
+    public Oglas updateOglas(int id, BigDecimal cena){
+        findOglas(id).setCena(cena);
+        return oglasiMap.get(id);
+    }
+
+    public Oglas updateOcena(int id, BigDecimal ocena){
+        findOglas(id).setOcena(ocena);
         return oglasiMap.get(id);
     }
 }
